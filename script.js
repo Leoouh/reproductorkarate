@@ -113,6 +113,7 @@ const videoTitle = document.getElementById('video-title');
 const videoDescription = document.getElementById('video-description');
 const videoGrid = document.getElementById('video-grid');
 const themeToggle = document.getElementById('theme-toggle');
+const completeButton = document.getElementById('complete-video');
 
 // Sistema de caché para videos
 const videoCache = new Map();
@@ -152,6 +153,17 @@ function loadVideoList() {
     });
 }
 
+// Función para actualizar el estado del botón de completado
+function updateCompleteButton(videoId) {
+    if (userProgress.completedVideos.has(videoId)) {
+        completeButton.classList.add('completed');
+        completeButton.innerHTML = '<i class="fas fa-check"></i> Completado';
+    } else {
+        completeButton.classList.remove('completed');
+        completeButton.innerHTML = '<i class="fas fa-check"></i> Marcar como completado';
+    }
+}
+
 // Función para reproducir un video
 function playVideo(video) {
     const videoContainer = document.querySelector('.video-container');
@@ -176,6 +188,9 @@ function playVideo(video) {
     
     // Actualizar la información del video
     updateVideoPlayer(video);
+
+    // Actualizar el estado del botón de completado
+    updateCompleteButton(video.id);
 
     // Actualizar último video visto
     userProgress.lastWatchedVideo = video.id;
@@ -251,6 +266,19 @@ function loadTheme() {
 
 // Event Listeners
 themeToggle.addEventListener('click', toggleTheme);
+completeButton.addEventListener('click', () => {
+    const currentVideo = videos.find(v => v.id === userProgress.lastWatchedVideo);
+    if (currentVideo) {
+        if (userProgress.completedVideos.has(currentVideo.id)) {
+            userProgress.completedVideos.delete(currentVideo.id);
+        } else {
+            userProgress.completedVideos.add(currentVideo.id);
+        }
+        saveUserProgress();
+        updateCompleteButton(currentVideo.id);
+        loadVideoList(); // Actualizar la lista de videos para mostrar el estado actualizado
+    }
+});
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {

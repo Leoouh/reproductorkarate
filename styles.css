@@ -100,6 +100,7 @@ h1 {
     color: var(--text-color);
     line-height: 1.6;
     opacity: 0.9;
+    margin-bottom: 20px;
 }
 
 .video-list h3 {
@@ -236,4 +237,60 @@ h1 {
     height: auto;
     margin: 0;
     display: block;
+}
+
+.video-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.complete-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.complete-button:hover {
+    background-color: #45a049;
+}
+
+.complete-button.completed {
+    background-color: #2196F3;
+}
+
+.complete-button.completed:hover {
+    background-color: #1976D2;
+}
+
+.complete-button i {
+    font-size: 1rem;
+}
+
+/* Estilos para el tema oscuro */
+[data-theme="dark"] .complete-button {
+    background-color: #388E3C;
+}
+
+[data-theme="dark"] .complete-button:hover {
+    background-color: #2E7D32;
+}
+
+[data-theme="dark"] .complete-button.completed {
+    background-color: #1565C0;
+}
+
+[data-theme="dark"] .complete-button.completed:hover {
+    background-color: #0D47A1;
 } 
