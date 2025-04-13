@@ -151,6 +151,13 @@ function loadThumbnail(video, videoCard) {
         img.onload = () => {
             thumbnailContainer.removeChild(spinner);
             thumbnailContainer.appendChild(img);
+            // Agregar el badge de completado si el video está marcado como completado
+            if (userProgress.completedVideos.has(video.id)) {
+                const completedBadge = document.createElement('div');
+                completedBadge.className = 'completed-badge';
+                completedBadge.textContent = '✓';
+                thumbnailContainer.appendChild(completedBadge);
+            }
         };
         return;
     }
@@ -160,6 +167,13 @@ function loadThumbnail(video, videoCard) {
     img.onload = () => {
         thumbnailContainer.removeChild(spinner);
         thumbnailContainer.appendChild(img);
+        // Agregar el badge de completado si el video está marcado como completado
+        if (userProgress.completedVideos.has(video.id)) {
+            const completedBadge = document.createElement('div');
+            completedBadge.className = 'completed-badge';
+            completedBadge.textContent = '✓';
+            thumbnailContainer.appendChild(completedBadge);
+        }
         thumbnailCache.set(video.id, video.thumbnail);
     };
     
@@ -172,6 +186,13 @@ function loadThumbnail(video, videoCard) {
             <span>${video.title}</span>
         `;
         thumbnailContainer.appendChild(placeholder);
+        // Agregar el badge de completado si el video está marcado como completado
+        if (userProgress.completedVideos.has(video.id)) {
+            const completedBadge = document.createElement('div');
+            completedBadge.className = 'completed-badge';
+            completedBadge.textContent = '✓';
+            thumbnailContainer.appendChild(completedBadge);
+        }
     };
     
     img.src = video.thumbnail;
@@ -184,6 +205,7 @@ function loadVideoList() {
     videos.forEach(video => {
         const videoCard = document.createElement('div');
         videoCard.className = 'video-card';
+        videoCard.setAttribute('data-video-id', video.id);
         videoCard.innerHTML = `
             <div class="video-thumbnail">
                 <!-- La miniatura se cargará aquí -->
@@ -306,6 +328,19 @@ function markVideoAsCompleted(videoId) {
     userProgress.completedVideos.add(videoId);
     saveUserProgress();
     loadVideoList(); // Actualizar la vista
+    
+    // Actualizar el badge de completado en el video actual
+    const videoCard = document.querySelector(`.video-card[data-video-id="${videoId}"]`);
+    if (videoCard) {
+        const thumbnailContainer = videoCard.querySelector('.video-thumbnail');
+        const existingBadge = thumbnailContainer.querySelector('.completed-badge');
+        if (!existingBadge) {
+            const completedBadge = document.createElement('div');
+            completedBadge.className = 'completed-badge';
+            completedBadge.textContent = '✓';
+            thumbnailContainer.appendChild(completedBadge);
+        }
+    }
 }
 
 // Función para actualizar el tiempo de visualización
