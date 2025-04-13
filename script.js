@@ -256,10 +256,25 @@ function showOfflineMessage(videoContainer) {
         <i class="fas fa-wifi-slash"></i>
         <h3>Sin conexión a internet</h3>
         <p>Parece que no tienes conexión a internet. Por favor, verifica tu conexión y vuelve a intentarlo.</p>
-        <button class="retry-button" onclick="window.location.reload()">
+        <button class="retry-button">
             <i class="fas fa-sync-alt"></i> Reintentar
         </button>
     `;
+    
+    // Agregar el event listener al botón
+    const retryButton = offlineMessage.querySelector('.retry-button');
+    retryButton.addEventListener('click', () => {
+        // Obtener el último video visto
+        const lastVideo = userProgress.lastWatchedVideo 
+            ? videos.find(v => v.id === userProgress.lastWatchedVideo)
+            : videos[0];
+            
+        if (lastVideo) {
+            // Intentar reproducir el video nuevamente
+            playVideo(lastVideo);
+        }
+    });
+    
     videoContainer.appendChild(offlineMessage);
 }
 
