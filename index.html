@@ -21,6 +21,14 @@
                 <div class="video-container">
                     <!-- El iframe de YouTube se cargará aquí dinámicamente -->
                 </div>
+                <div class="video-controls">
+                    <button id="speed-control" class="control-button">
+                        <i class="fas fa-tachometer-alt"></i> Velocidad: 1x
+                    </button>
+                    <button id="fullscreen-toggle" class="control-button">
+                        <i class="fas fa-expand"></i> Pantalla completa
+                    </button>
+                </div>
                 <div class="video-info">
                     <div class="video-header">
                         <h2 id="video-title">Selecciona un video</h2>
@@ -40,6 +48,7 @@
             </section>
         </main>
     </div>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
 </html> 

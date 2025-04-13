@@ -293,4 +293,58 @@ h1 {
 
 [data-theme="dark"] .complete-button.completed:hover {
     background-color: #0D47A1;
+}
+
+.video-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    padding: 0 10px;
+}
+
+.control-button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    transition: background-color 0.3s;
+}
+
+.control-button:hover {
+    background-color: var(--secondary-color);
+}
+
+.control-button i {
+    font-size: 1rem;
+}
+
+[data-theme="dark"] .control-button {
+    background-color: var(--secondary-color);
+}
+
+[data-theme="dark"] .control-button:hover {
+    background-color: var(--primary-color);
+}
+
+.video-container.fullscreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding-top: 0;
+    z-index: 1000;
+}
+
+.video-container.fullscreen iframe {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 } 

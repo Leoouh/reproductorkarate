@@ -114,6 +114,13 @@ const videoDescription = document.getElementById('video-description');
 const videoGrid = document.getElementById('video-grid');
 const themeToggle = document.getElementById('theme-toggle');
 const completeButton = document.getElementById('complete-video');
+const speedControl = document.getElementById('speed-control');
+const fullscreenToggle = document.getElementById('fullscreen-toggle');
+const videoContainer = document.querySelector('.video-container');
+
+// Velocidades disponibles para el video
+const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+let currentSpeedIndex = 2; // Inicia en 1x
 
 // Sistema de caché para videos
 const videoCache = new Map();
@@ -164,6 +171,14 @@ function updateCompleteButton(videoId) {
     }
 }
 
+// Función para mantener la página en la parte superior
+function scrollToTop() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
 // Función para reproducir un video
 function playVideo(video) {
     const videoContainer = document.querySelector('.video-container');
@@ -171,14 +186,15 @@ function playVideo(video) {
     // Limpiar el contenedor antes de agregar el nuevo iframe
     videoContainer.innerHTML = '';
     
-    // Crear un nuevo iframe con la URL del video
+    // Crear un nuevo iframe con la URL del video y los parámetros necesarios
     const iframe = document.createElement('iframe');
     iframe.setAttribute('width', '100%');
     iframe.setAttribute('height', '100%');
-    iframe.setAttribute('src', video.videoUrl);
+    iframe.setAttribute('src', `${video.videoUrl}?enablejsapi=1&origin=${window.location.origin}`);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
     iframe.setAttribute('allowfullscreen', '');
+    iframe.setAttribute('id', 'youtube-player');
     
     // Agregar el iframe al contenedor
     videoContainer.appendChild(iframe);
@@ -196,9 +212,11 @@ function playVideo(video) {
     userProgress.lastWatchedVideo = video.id;
     saveUserProgress();
 
-    // Desplazar la página al reproductor de video
+    // Desplazar la página al reproductor de video solo si el usuario hace clic en un video
     const videoPlayerSection = document.querySelector('.video-player');
-    videoPlayerSection.scrollIntoView({ behavior: 'smooth' });
+    if (this.event && this.event.type === 'click') {
+        videoPlayerSection.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // Función para actualizar el reproductor de video
@@ -264,6 +282,49 @@ function loadTheme() {
     icon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 }
 
+// Función para cambiar la velocidad del video
+function changeVideoSpeed() {
+    currentSpeedIndex = (currentSpeedIndex + 1) % speeds.length;
+    const newSpeed = speeds[currentSpeedIndex];
+    
+    // Actualizar el texto del botón
+    speedControl.innerHTML = `<i class="fas fa-tachometer-alt"></i> Velocidad: ${newSpeed}x`;
+    
+    // Cambiar la velocidad del video si está cargado
+    const iframe = document.getElementById('youtube-player');
+    if (iframe) {
+        iframe.contentWindow.postMessage(JSON.stringify({
+            event: 'command',
+            func: 'setPlaybackRate',
+            args: [newSpeed]
+        }), '*');
+    }
+}
+
+// Función para alternar el modo de pantalla completa
+function toggleFullscreen() {
+    const videoContainer = document.querySelector('.video-container');
+    if (!document.fullscreenElement) {
+        videoContainer.classList.add('fullscreen');
+        if (videoContainer.requestFullscreen) {
+            videoContainer.requestFullscreen();
+        } else if (videoContainer.webkitRequestFullscreen) {
+            videoContainer.webkitRequestFullscreen();
+        } else if (videoContainer.msRequestFullscreen) {
+            videoContainer.msRequestFullscreen();
+        }
+    } else {
+        videoContainer.classList.remove('fullscreen');
+        if (document.exitFullscreen) {
+            document.exitFullscreen();
+        } else if (document.webkitExitFullscreen) {
+            document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) {
+            document.msExitFullscreen();
+        }
+    }
+}
+
 // Event Listeners
 themeToggle.addEventListener('click', toggleTheme);
 completeButton.addEventListener('click', () => {
@@ -280,18 +341,35 @@ completeButton.addEventListener('click', () => {
     }
 });
 
+// Event Listeners para los controles
+speedControl.addEventListener('click', changeVideoSpeed);
+fullscreenToggle.addEventListener('click', toggleFullscreen);
+
+// Event listener para cuando se sale del modo pantalla completa
+document.addEventListener('fullscreenchange', () => {
+    if (!document.fullscreenElement) {
+        videoContainer.classList.remove('fullscreen');
+    }
+});
+
+// Event listener para cuando se recarga la página
+window.addEventListener('load', scrollToTop);
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
-    loadTheme();
     loadUserProgress();
     loadVideoList();
+    loadTheme();
+    scrollToTop(); // Asegurar que la página comience desde arriba
     
-    // Reproducir el último video visto o el primero
+    // Reproducir el último video visto o el primero, pero sin desplazar la página
     const videoToPlay = userProgress.lastWatchedVideo 
         ? videos.find(v => v.id === userProgress.lastWatchedVideo)
         : videos[0];
     
     if (videoToPlay) {
-        playVideo(videoToPlay);
+        // Llamar a playVideo sin evento para evitar el scroll automático
+        const fakeEvent = { type: 'init' };
+        playVideo.call({ event: fakeEvent }, videoToPlay);
     }
 }); 
