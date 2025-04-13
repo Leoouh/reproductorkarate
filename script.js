@@ -114,6 +114,16 @@ const videoDescription = document.getElementById('video-description');
 const videoGrid = document.getElementById('video-grid');
 const themeToggle = document.getElementById('theme-toggle');
 
+// Sistema de caché para videos
+const videoCache = new Map();
+
+// Sistema de progreso del usuario
+const userProgress = {
+    completedVideos: new Set(),
+    lastWatchedVideo: null,
+    watchTime: {}
+};
+
 // Función para cargar la lista de videos
 function loadVideoList() {
     videoGrid.innerHTML = '';
@@ -123,11 +133,17 @@ function loadVideoList() {
         videoCard.className = 'video-card';
         videoCard.innerHTML = `
             <div class="video-thumbnail">
-                <img src="${video.thumbnail}" alt="${video.title}">
+                <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
+                ${userProgress.completedVideos.has(video.id) ? '<div class="completed-badge">✓</div>' : ''}
             </div>
             <div class="video-card-info">
                 <h4>${video.title}</h4>
                 <p>${video.description}</p>
+                <div class="video-progress">
+                    <div class="progress-bar">
+                        <div class="progress" style="width: ${userProgress.watchTime[video.id] || 0}%"></div>
+                    </div>
+                </div>
             </div>
         `;
         
@@ -138,19 +154,69 @@ function loadVideoList() {
 
 // Función para reproducir un video
 function playVideo(video) {
-    const videoContainer = document.querySelector('.video-container');
-    videoContainer.innerHTML = `
-        <iframe 
-            width="100%" 
-            height="100%" 
-            src="${video.videoUrl}" 
-            frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-            allowfullscreen>
-        </iframe>
-    `;
+    // Verificar caché
+    if (videoCache.has(video.id)) {
+        const cachedVideo = videoCache.get(video.id);
+        updateVideoPlayer(cachedVideo);
+    } else {
+        const videoContainer = document.querySelector('.video-container');
+        videoContainer.innerHTML = `
+            <iframe 
+                width="100%" 
+                height="100%" 
+                src="${video.videoUrl}" 
+                frameborder="0" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        `;
+        videoCache.set(video.id, video);
+        updateVideoPlayer(video);
+    }
+
+    // Actualizar último video visto
+    userProgress.lastWatchedVideo = video.id;
+    saveUserProgress();
+}
+
+// Función para actualizar el reproductor de video
+function updateVideoPlayer(video) {
     videoTitle.textContent = video.title;
     videoDescription.textContent = video.description;
+}
+
+// Función para guardar el progreso del usuario
+function saveUserProgress() {
+    const progressData = {
+        completedVideos: Array.from(userProgress.completedVideos),
+        lastWatchedVideo: userProgress.lastWatchedVideo,
+        watchTime: userProgress.watchTime
+    };
+    localStorage.setItem('userProgress', JSON.stringify(progressData));
+}
+
+// Función para cargar el progreso del usuario
+function loadUserProgress() {
+    const savedProgress = localStorage.getItem('userProgress');
+    if (savedProgress) {
+        const progressData = JSON.parse(savedProgress);
+        userProgress.completedVideos = new Set(progressData.completedVideos);
+        userProgress.lastWatchedVideo = progressData.lastWatchedVideo;
+        userProgress.watchTime = progressData.watchTime || {};
+    }
+}
+
+// Función para marcar un video como completado
+function markVideoAsCompleted(videoId) {
+    userProgress.completedVideos.add(videoId);
+    saveUserProgress();
+    loadVideoList(); // Actualizar la vista
+}
+
+// Función para actualizar el tiempo de visualización
+function updateWatchTime(videoId, percentage) {
+    userProgress.watchTime[videoId] = Math.max(userProgress.watchTime[videoId] || 0, percentage);
+    saveUserProgress();
 }
 
 // Función para manejar el cambio de tema
@@ -182,10 +248,15 @@ themeToggle.addEventListener('click', toggleTheme);
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
     loadTheme();
+    loadUserProgress();
     loadVideoList();
     
-    // Reproducir el primer video por defecto
-    if (videos.length > 0) {
-        playVideo(videos[0]);
+    // Reproducir el último video visto o el primero
+    const videoToPlay = userProgress.lastWatchedVideo 
+        ? videos.find(v => v.id === userProgress.lastWatchedVideo)
+        : videos[0];
+    
+    if (videoToPlay) {
+        playVideo(videoToPlay);
     }
 }); 
