@@ -248,12 +248,33 @@ function scrollToTop() {
     });
 }
 
+// Función para mostrar el mensaje de error sin conexión
+function showOfflineMessage(videoContainer) {
+    const offlineMessage = document.createElement('div');
+    offlineMessage.className = 'offline-message';
+    offlineMessage.innerHTML = `
+        <i class="fas fa-wifi-slash"></i>
+        <h3>Sin conexión a internet</h3>
+        <p>Parece que no tienes conexión a internet. Por favor, verifica tu conexión y vuelve a intentarlo.</p>
+        <button class="retry-button" onclick="window.location.reload()">
+            <i class="fas fa-sync-alt"></i> Reintentar
+        </button>
+    `;
+    videoContainer.appendChild(offlineMessage);
+}
+
 // Función para reproducir un video
 function playVideo(video) {
     const videoContainer = document.querySelector('.video-container');
     
     // Limpiar el contenedor antes de agregar el nuevo iframe
     videoContainer.innerHTML = '';
+    
+    // Verificar la conexión a internet
+    if (!navigator.onLine) {
+        showOfflineMessage(videoContainer);
+        return;
+    }
     
     // Crear un nuevo iframe con la URL del video y los parámetros necesarios
     const iframe = document.createElement('iframe');
@@ -264,6 +285,11 @@ function playVideo(video) {
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
     iframe.setAttribute('allowfullscreen', '');
     iframe.setAttribute('id', 'youtube-player');
+    
+    // Manejar errores de carga del iframe
+    iframe.onerror = () => {
+        showOfflineMessage(videoContainer);
+    };
     
     // Agregar el iframe al contenedor
     videoContainer.appendChild(iframe);
@@ -444,6 +470,28 @@ document.addEventListener('fullscreenchange', () => {
 
 // Event listener para cuando se recarga la página
 window.addEventListener('load', scrollToTop);
+
+// Event listener para cambios en la conexión
+window.addEventListener('online', () => {
+    const videoContainer = document.querySelector('.video-container');
+    const offlineMessage = videoContainer.querySelector('.offline-message');
+    if (offlineMessage) {
+        const lastVideo = userProgress.lastWatchedVideo 
+            ? videos.find(v => v.id === userProgress.lastWatchedVideo)
+            : videos[0];
+        if (lastVideo) {
+            playVideo(lastVideo);
+        }
+    }
+});
+
+window.addEventListener('offline', () => {
+    const videoContainer = document.querySelector('.video-container');
+    const iframe = videoContainer.querySelector('iframe');
+    if (iframe) {
+        showOfflineMessage(videoContainer);
+    }
+});
 
 // Inicialización
 document.addEventListener('DOMContentLoaded', () => {
