@@ -125,12 +125,57 @@ let currentSpeedIndex = 2; // Inicia en 1x
 // Sistema de caché para videos
 const videoCache = new Map();
 
+// Sistema de caché para miniaturas
+const thumbnailCache = new Map();
+
 // Sistema de progreso del usuario
 const userProgress = {
     completedVideos: new Set(),
     lastWatchedVideo: null,
     watchTime: {}
 };
+
+// Función para cargar una miniatura con manejo de errores
+function loadThumbnail(video, videoCard) {
+    const thumbnailContainer = videoCard.querySelector('.video-thumbnail');
+    
+    // Mostrar spinner de carga
+    const spinner = document.createElement('div');
+    spinner.className = 'loading-spinner';
+    thumbnailContainer.appendChild(spinner);
+    
+    // Verificar si la miniatura está en caché
+    if (thumbnailCache.has(video.id)) {
+        const img = new Image();
+        img.src = thumbnailCache.get(video.id);
+        img.onload = () => {
+            thumbnailContainer.removeChild(spinner);
+            thumbnailContainer.appendChild(img);
+        };
+        return;
+    }
+    
+    // Cargar la miniatura
+    const img = new Image();
+    img.onload = () => {
+        thumbnailContainer.removeChild(spinner);
+        thumbnailContainer.appendChild(img);
+        thumbnailCache.set(video.id, video.thumbnail);
+    };
+    
+    img.onerror = () => {
+        thumbnailContainer.removeChild(spinner);
+        const placeholder = document.createElement('div');
+        placeholder.className = 'thumbnail-placeholder';
+        placeholder.innerHTML = `
+            <i class="fas fa-video"></i>
+            <span>${video.title}</span>
+        `;
+        thumbnailContainer.appendChild(placeholder);
+    };
+    
+    img.src = video.thumbnail;
+}
 
 // Función para cargar la lista de videos
 function loadVideoList() {
@@ -141,8 +186,7 @@ function loadVideoList() {
         videoCard.className = 'video-card';
         videoCard.innerHTML = `
             <div class="video-thumbnail">
-                <img src="${video.thumbnail}" alt="${video.title}" loading="lazy">
-                ${userProgress.completedVideos.has(video.id) ? '<div class="completed-badge">✓</div>' : ''}
+                <!-- La miniatura se cargará aquí -->
             </div>
             <div class="video-card-info">
                 <h4>${video.title}</h4>
@@ -154,6 +198,9 @@ function loadVideoList() {
                 </div>
             </div>
         `;
+        
+        // Cargar la miniatura
+        loadThumbnail(video, videoCard);
         
         videoCard.addEventListener('click', () => playVideo(video));
         videoGrid.appendChild(videoCard);
@@ -190,7 +237,7 @@ function playVideo(video) {
     const iframe = document.createElement('iframe');
     iframe.setAttribute('width', '100%');
     iframe.setAttribute('height', '100%');
-    iframe.setAttribute('src', `${video.videoUrl}?enablejsapi=1&origin=${window.location.origin}`);
+    iframe.setAttribute('src', `${video.videoUrl}?enablejsapi=1&origin=${window.location.origin}&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3&modestbranding=1&rel=0`);
     iframe.setAttribute('frameborder', '0');
     iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
     iframe.setAttribute('allowfullscreen', '');
@@ -230,7 +277,8 @@ function saveUserProgress() {
     const progressData = {
         completedVideos: Array.from(userProgress.completedVideos),
         lastWatchedVideo: userProgress.lastWatchedVideo,
-        watchTime: userProgress.watchTime
+        watchTime: userProgress.watchTime,
+        thumbnailCache: Array.from(thumbnailCache.entries())
     };
     localStorage.setItem('userProgress', JSON.stringify(progressData));
 }
@@ -243,6 +291,13 @@ function loadUserProgress() {
         userProgress.completedVideos = new Set(progressData.completedVideos);
         userProgress.lastWatchedVideo = progressData.lastWatchedVideo;
         userProgress.watchTime = progressData.watchTime || {};
+        
+        // Cargar el caché de miniaturas
+        if (progressData.thumbnailCache) {
+            progressData.thumbnailCache.forEach(([id, thumbnail]) => {
+                thumbnailCache.set(parseInt(id), thumbnail);
+            });
+        }
     }
 }
 
