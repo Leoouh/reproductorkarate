@@ -3,28 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reproductor de Videos de Karate</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Aprende Karate - Tu Curso Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
-        <h1>Aprende Karate En Casa</h1>
-        <div class="video-container">
-            <iframe id="video" src="https://www.youtube.com/embed/_8bmMYCwJCM" frameborder="0" allowfullscreen></iframe>
-        </div>
-        <ul class="video-list">
-            <li data-video="_8bmMYCwJCM">Clase 1: Introducción al Karate</li>
-            <li data-video="CB2KFb88gbc">Clase 2: Técnicas Básicas</li>
-            <li data-video="tlN8u7lMcJI">Clase 3: Primeros Movimientos Y Técnica De Cadera</li>
-            <li data-video="GBaM9GJLwhI">Clase 4: Posicion Adelantada Y Defensas</li>
-            <li data-video="KG58XGqE0D0">Clase 5: Movimiento De Cadera, Defensas Y Puliendo Tecnicas</li>
-            <li data-video="YjM2xWJduXQ">Clase 6: Tecnicas De Puño Y Aplicacion De Cadera</li>
-            <li data-video="dLqezGc0Q54">Clase 7: Tecnica De Impacto Y Mejora De Defensas</li>
-            <li data-video="0GKc2TBE8-M">Clase 8: Defensa Y Nuevas Posiciones</li>
-            <li data-video="_EqXdEBs7iE">Clase 9: Primera Patada Y Nueva Defensa</li>
-            <li data-video="Ze7WWjhlRrA">Clase 10: Patadas Frontales Y Desplazamientos</li>
-        </ul>
+        <header>
+            <img src="icono.png" alt="Aprende Karate" class="header-logo">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+            <section class="video-player">
+                <div class="video-container">
+                    <!-- El iframe de YouTube se cargará aquí dinámicamente -->
+                </div>
+                <div class="video-info">
+                    <h2 id="video-title">Selecciona un video</h2>
+                    <p id="video-description">Elige un video de la lista para comenzar</p>
+                </div>
+            </section>
+
+            <section class="video-list">
+                <h3>Lecciones Disponibles</h3>
+                <div class="video-grid" id="video-grid">
+                    <!-- Los videos se cargarán dinámicamente aquí -->
+                </div>
+            </section>
+        </main>
     </div>
     <script src="script.js"></script>
 </body>
-</html>
+</html> 
