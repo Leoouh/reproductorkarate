@@ -154,29 +154,36 @@ function loadVideoList() {
 
 // Función para reproducir un video
 function playVideo(video) {
-    // Verificar caché
-    if (videoCache.has(video.id)) {
-        const cachedVideo = videoCache.get(video.id);
-        updateVideoPlayer(cachedVideo);
-    } else {
-        const videoContainer = document.querySelector('.video-container');
-        videoContainer.innerHTML = `
-            <iframe 
-                width="100%" 
-                height="100%" 
-                src="${video.videoUrl}" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        `;
-        videoCache.set(video.id, video);
-        updateVideoPlayer(video);
-    }
+    const videoContainer = document.querySelector('.video-container');
+    
+    // Limpiar el contenedor antes de agregar el nuevo iframe
+    videoContainer.innerHTML = '';
+    
+    // Crear un nuevo iframe con la URL del video
+    const iframe = document.createElement('iframe');
+    iframe.setAttribute('width', '100%');
+    iframe.setAttribute('height', '100%');
+    iframe.setAttribute('src', video.videoUrl);
+    iframe.setAttribute('frameborder', '0');
+    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+    iframe.setAttribute('allowfullscreen', '');
+    
+    // Agregar el iframe al contenedor
+    videoContainer.appendChild(iframe);
+    
+    // Actualizar el caché
+    videoCache.set(video.id, video);
+    
+    // Actualizar la información del video
+    updateVideoPlayer(video);
 
     // Actualizar último video visto
     userProgress.lastWatchedVideo = video.id;
     saveUserProgress();
+
+    // Desplazar la página al reproductor de video
+    const videoPlayerSection = document.querySelector('.video-player');
+    videoPlayerSection.scrollIntoView({ behavior: 'smooth' });
 }
 
 // Función para actualizar el reproductor de video
