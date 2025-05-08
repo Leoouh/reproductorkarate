@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Técnicas Básicas - Cinturón Blanco Shotokan Karate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .technique-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        .technique-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .technique-item {
+            margin-bottom: 15px;
+            padding: 15px;
+            border-left: 4px solid var(--primary-color);
+            background-color: var(--background-color);
+            border-radius: 0 8px 8px 0;
+        }
+        .technique-name {
+            font-weight: bold;
+            color: var(--text-color);
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+        .technique-description {
+            color: var(--text-color);
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="icono.png" alt="Aprende Karate" class="header-logo">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+
+            <!-- Posturas -->
+            <div class="technique-section">
+                <h2 class="technique-title">🧍 Posturas (Dachi)</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Heisoku-dachi</div>
+                    <div class="technique-description">Pies juntos y paralelos, utilizados comúnmente al inicio y final de las prácticas.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Musubi-dachi</div>
+                    <div class="technique-description">Similar a Heisoku-dachi, pero con los talones juntos y las puntas de los pies abiertas en un ángulo de 45°, empleada para saludar.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Hachiji-dachi</div>
+                    <div class="technique-description">Pies separados al ancho de los hombros y apuntando hacia afuera a 45°, posición de preparación.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Zenkutsu-dachi</div>
+                    <div class="technique-description">Una postura larga y baja con el 70% del peso en la pierna delantera, utilizada para ataques y desplazamientos hacia adelante.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Kokutsu-dachi</div>
+                    <div class="technique-description">El 70% del peso se coloca en la pierna trasera, con la pierna delantera extendida; usada principalmente en defensas.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Kiba-dachi</div>
+                    <div class="technique-description">Pies paralelos y separados más allá del ancho de los hombros, con las rodillas flexionadas; fortalece las piernas y se utiliza en técnicas laterales.</div>
+                </div>
+            </div>
+
+            <!-- Golpes de Puño -->
+            <div class="technique-section">
+                <h2 class="technique-title">✊ Golpes de Puño (Tsuki)</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Choku-zuki</div>
+                    <div class="technique-description">Un golpe recto al frente desde una posición natural, enfatizando la alineación y la rotación del puño al final del movimiento.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Oi-zuki</div>
+                    <div class="technique-description">Similar al Choku-zuki, pero se ejecuta avanzando con la pierna del mismo lado del brazo que golpea, generando mayor impulso.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Gyaku-zuki</div>
+                    <div class="technique-description">Golpe con el brazo contrario a la pierna adelantada, aprovechando la rotación de las caderas para generar potencia.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Kizami-zuki</div>
+                    <div class="technique-description">Un golpe rápido con el brazo delantero, útil para interrumpir al oponente y crear oportunidades de ataque.</div>
+                </div>
+            </div>
+
+            <!-- Bloqueos -->
+            <div class="technique-section">
+                <h2 class="technique-title">✋ Bloqueos (Uke)</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Gedan-barai</div>
+                    <div class="technique-description">Desvía ataques dirigidos a la parte baja del cuerpo mediante un movimiento descendente del antebrazo.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Age-uke</div>
+                    <div class="technique-description">Bloquea ataques altos, como golpes a la cabeza, elevando el antebrazo en un ángulo de 45° sobre la frente.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Soto-uke</div>
+                    <div class="technique-description">Defiende contra ataques al torso provenientes del exterior, moviendo el antebrazo desde el hombro opuesto hacia afuera.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Uchi-uke</div>
+                    <div class="technique-description">Protege el centro del cuerpo de ataques directos, moviendo el antebrazo desde el exterior hacia el centro del cuerpo.</div>
+                </div>
+            </div>
+
+            <!-- Patadas -->
+            <div class="technique-section">
+                <h2 class="technique-title">🦵 Patadas (Geri)</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Mae-geri</div>
+                    <div class="technique-description">Se ejecuta levantando la rodilla y extendiendo la pierna hacia adelante, golpeando con la bola del pie; apunta al abdomen o pecho del oponente.</div>
+                </div>
+            </div>
+
+            <!-- Conceptos Fundamentales -->
+            <div class="technique-section">
+                <h2 class="technique-title">🧠 Conceptos Fundamentales</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Rei (Saludo)</div>
+                    <div class="technique-description">Muestra de respeto al comenzar y finalizar la práctica.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Dojo Kun</div>
+                    <div class="technique-description">Conjunto de principios éticos que guían la conducta del practicante dentro y fuera del dojo.</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Numeración en japonés</div>
+                    <div class="technique-description">Aprender a contar del 1 al 10 (ichi, ni, san, shi, go, roku, shichi, hachi, kyū, jū).</div>
+                </div>
+                <div class="technique-item">
+                    <div class="technique-name">Terminología básica</div>
+                    <div class="technique-description">Familiarización con los nombres japoneses de técnicas y posturas.</div>
+                </div>
+            </div>
+
+            <!-- Kata Inicial -->
+            <div class="technique-section">
+                <h2 class="technique-title">🧩 Kata Inicial</h2>
+                <div class="technique-item">
+                    <div class="technique-name">Taikyoku Shodan</div>
+                    <div class="technique-description">Kata introductorio que combina movimientos básicos como Oi-zuki y Gedan-barai en una secuencia estructurada, ayudando a los estudiantes a practicar coordinación y fluidez.</div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

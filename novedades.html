@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novedades - Aprende Karate</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .news-section {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+        }
+        .news-title {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .news-item {
+            margin-bottom: 25px;
+            padding: 20px;
+            border-left: 4px solid var(--primary-color);
+            background-color: var(--background-color);
+            border-radius: 0 8px 8px 0;
+            transition: transform 0.3s ease;
+        }
+        .news-item:hover {
+            transform: translateX(5px);
+        }
+        .news-date {
+            color: var(--primary-color);
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .news-content {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .news-content h3 {
+            margin-bottom: 10px;
+            color: var(--secondary-color);
+        }
+        .news-content p {
+            margin-bottom: 15px;
+        }
+        .news-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="icono.png" alt="Aprende Karate" class="header-logo">
+            <button id="theme-toggle" class="theme-toggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </header>
+
+        <main>
+            <div class="news-section">
+                <h2 class="news-title">📢 Últimas Actualizaciones</h2>
+                
+                <div class="news-item">
+                    <div class="news-date">
+                        <i class="far fa-calendar-alt"></i> 07 de Mayo, 2025
+                    </div>
+                    <div class="news-content">
+                        <h3>¡Lanzamiento de la Versión 1.0!</h3>
+                        <p>¡Estamos emocionados de anunciar que ya está disponible la versión 1.0 de nuestra app! Esta versión incluye todo el contenido necesario para el cinturón blanco, con lecciones detalladas sobre técnicas básicas, posturas, katas y más. ¡Comienza tu viaje en el karate con nosotros!</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
