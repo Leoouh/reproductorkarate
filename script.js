@@ -281,44 +281,331 @@ function showOfflineMessage(videoContainer) {
 // Función para reproducir un video
 function playVideo(video) {
     const videoContainer = document.querySelector('.video-container');
-    
-    // Limpiar el contenedor antes de agregar el nuevo iframe
     videoContainer.innerHTML = '';
-    
+
     // Verificar la conexión a internet
     if (!navigator.onLine) {
         showOfflineMessage(videoContainer);
         return;
     }
-    
-    // Crear un nuevo iframe con la URL del video y los parámetros necesarios
-    const iframe = document.createElement('iframe');
-    iframe.setAttribute('width', '100%');
-    iframe.setAttribute('height', '100%');
-    iframe.setAttribute('src', `${video.videoUrl}?enablejsapi=1&origin=${window.location.origin}&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3&modestbranding=1&rel=0`);
-    iframe.setAttribute('frameborder', '0');
-    iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
-    iframe.setAttribute('allowfullscreen', '');
-    iframe.setAttribute('id', 'youtube-player');
-    
-    // Manejar errores de carga del iframe
-    iframe.onerror = () => {
-        showOfflineMessage(videoContainer);
+
+    // Crear el overlay personalizado con la miniatura y el botón de play
+    const overlay = document.createElement('div');
+    overlay.style.position = 'absolute';
+    overlay.style.top = '0';
+    overlay.style.left = '0';
+    overlay.style.width = '100%';
+    overlay.style.height = '100%';
+    overlay.style.display = 'flex';
+    overlay.style.alignItems = 'center';
+    overlay.style.justifyContent = 'center';
+    overlay.style.cursor = 'pointer';
+    overlay.style.background = 'rgba(0,0,0,0.35)';
+    overlay.style.zIndex = '2';
+    overlay.className = 'custom-video-overlay';
+
+    // Miniatura
+    const img = document.createElement('img');
+    img.src = video.thumbnail;
+    img.alt = video.title;
+    img.style.width = '100%';
+    img.style.height = '100%';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '8px';
+    img.style.position = 'absolute';
+    img.style.top = '0';
+    img.style.left = '0';
+    img.style.zIndex = '1';
+
+    // Botón de play personalizado
+    const playBtn = document.createElement('div');
+    playBtn.innerHTML = '<i class="fas fa-play"></i>';
+    playBtn.style.background = 'rgba(0,0,0,0.7)';
+    playBtn.style.color = '#fff';
+    playBtn.style.borderRadius = '50%';
+    playBtn.style.width = '80px';
+    playBtn.style.height = '80px';
+    playBtn.style.display = 'flex';
+    playBtn.style.alignItems = 'center';
+    playBtn.style.justifyContent = 'center';
+    playBtn.style.fontSize = '2.5rem';
+    playBtn.style.zIndex = '3';
+    playBtn.style.boxShadow = '0 4px 16px rgba(0,0,0,0.25)';
+    playBtn.style.transition = 'transform 0.2s';
+    playBtn.className = 'custom-play-btn';
+    playBtn.onmouseover = () => playBtn.style.transform = 'scale(1.1)';
+    playBtn.onmouseout = () => playBtn.style.transform = 'scale(1)';
+
+    overlay.appendChild(playBtn);
+    videoContainer.appendChild(img);
+    videoContainer.appendChild(overlay);
+
+    // Al hacer clic, reemplazar por el iframe de YouTube con autoplay
+    overlay.onclick = () => {
+        videoContainer.innerHTML = '';
+        
+        // Crear el iframe
+        const iframe = document.createElement('iframe');
+        iframe.setAttribute('width', '100%');
+        iframe.setAttribute('height', '100%');
+        iframe.setAttribute('src', `${video.videoUrl}?autoplay=1&enablejsapi=1&origin=${window.location.origin}&cc_load_policy=0&cc_lang_pref=es&hl=es&iv_load_policy=3&modestbranding=1&rel=0&showinfo=0&controls=0&fs=1&playsinline=1&disablekb=1`);
+        iframe.setAttribute('frameborder', '0');
+        iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('id', 'youtube-player');
+        videoContainer.appendChild(iframe);
+
+        // Crear bloqueadores para diferentes áreas
+        const createBlocker = (styles) => {
+            const blocker = document.createElement('div');
+            Object.assign(blocker.style, {
+                position: 'absolute',
+                zIndex: '9999',
+                pointerEvents: 'auto',
+                touchAction: 'none',
+                webkitTouchCallout: 'none',
+                webkitUserSelect: 'none',
+                userSelect: 'none',
+                ...styles
+            });
+            
+            const preventEvents = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            };
+            
+            ['touchstart', 'touchmove', 'touchend', 'click'].forEach(eventType => {
+                blocker.addEventListener(eventType, preventEvents, { passive: false });
+            });
+            
+            return blocker;
+        };
+
+        // Bloqueador superior
+        videoContainer.appendChild(createBlocker({
+            top: '0',
+            left: '0',
+            width: '100%',
+            height: '60px'
+        }));
+
+        // Bloqueador inferior (excepto donde están los controles)
+        videoContainer.appendChild(createBlocker({
+            bottom: '50px', // Dejamos espacio para los controles
+            left: '0',
+            width: '100%',
+            height: '60px'
+        }));
+
+        // Bloqueador derecho
+        videoContainer.appendChild(createBlocker({
+            top: '0',
+            right: '0',
+            width: '200px',
+            height: '100%'
+        }));
+
+        // Bloqueador izquierdo
+        videoContainer.appendChild(createBlocker({
+            top: '0',
+            left: '0',
+            width: '200px',
+            height: '100%'
+        }));
+
+        // Bloqueador central
+        videoContainer.appendChild(createBlocker({
+            top: '60px',
+            left: '200px',
+            right: '200px',
+            bottom: '110px', // Dejamos espacio para los controles
+            width: 'auto',
+            height: 'auto'
+        }));
+
+        // Crear controles personalizados
+        const controlsContainer = document.createElement('div');
+        controlsContainer.style.position = 'absolute';
+        controlsContainer.style.bottom = '0';
+        controlsContainer.style.left = '0';
+        controlsContainer.style.width = '100%';
+        controlsContainer.style.height = '50px';
+        controlsContainer.style.zIndex = '10000';
+        controlsContainer.style.pointerEvents = 'auto';
+        controlsContainer.style.display = 'flex';
+        controlsContainer.style.justifyContent = 'center';
+        controlsContainer.style.alignItems = 'center';
+        controlsContainer.style.background = 'linear-gradient(transparent, rgba(0,0,0,0.7))';
+        controlsContainer.style.gap = '10px';
+        controlsContainer.style.transition = 'opacity 0.3s ease-in-out, transform 0.3s ease-in-out';
+        controlsContainer.style.opacity = '0';
+        controlsContainer.style.transform = 'translateY(100%)';
+
+        // Crear botón de toggle para los controles
+        const toggleControlsBtn = document.createElement('button');
+        toggleControlsBtn.innerHTML = '<i class="fas fa-chevron-up"></i>';
+        toggleControlsBtn.style.position = 'absolute';
+        toggleControlsBtn.style.bottom = '10px';
+        toggleControlsBtn.style.right = '10px';
+        toggleControlsBtn.style.background = 'rgba(0,0,0,0.7)';
+        toggleControlsBtn.style.border = 'none';
+        toggleControlsBtn.style.color = 'white';
+        toggleControlsBtn.style.width = '30px';
+        toggleControlsBtn.style.height = '30px';
+        toggleControlsBtn.style.borderRadius = '50%';
+        toggleControlsBtn.style.cursor = 'pointer';
+        toggleControlsBtn.style.display = 'flex';
+        toggleControlsBtn.style.alignItems = 'center';
+        toggleControlsBtn.style.justifyContent = 'center';
+        toggleControlsBtn.style.zIndex = '10001';
+        toggleControlsBtn.style.transition = 'transform 0.3s ease-in-out';
+        toggleControlsBtn.style.pointerEvents = 'auto';
+
+        let controlsVisible = false;
+
+        // Función para mostrar los controles
+        const showControls = () => {
+            controlsContainer.style.opacity = '1';
+            controlsContainer.style.transform = 'translateY(0)';
+            toggleControlsBtn.style.transform = 'rotate(180deg)';
+            controlsVisible = true;
+        };
+
+        // Función para ocultar los controles
+        const hideControls = () => {
+            controlsContainer.style.opacity = '0';
+            controlsContainer.style.transform = 'translateY(100%)';
+            toggleControlsBtn.style.transform = 'rotate(0deg)';
+            controlsVisible = false;
+        };
+
+        // Toggle de controles
+        toggleControlsBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (controlsVisible) {
+                hideControls();
+            } else {
+                showControls();
+            }
+        });
+
+        // Mostrar controles al inicio
+        showControls();
+
+        // Función para crear botones de control
+        const createControlButton = (icon, action) => {
+            const button = document.createElement('button');
+            button.innerHTML = `<i class="fas ${icon}"></i>`;
+            button.style.background = 'none';
+            button.style.border = 'none';
+            button.style.color = 'white';
+            button.style.fontSize = '20px';
+            button.style.cursor = 'pointer';
+            button.style.padding = '10px';
+            button.style.display = 'flex';
+            button.style.alignItems = 'center';
+            button.style.justifyContent = 'center';
+            button.style.transition = 'transform 0.2s';
+            button.style.opacity = '0.8';
+            
+            button.onmouseover = () => {
+                button.style.transform = 'scale(1.1)';
+                button.style.opacity = '1';
+            };
+            button.onmouseout = () => {
+                button.style.transform = 'scale(1)';
+                button.style.opacity = '0.8';
+            };
+            
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                action();
+            });
+            return button;
+        };
+
+        // Botón de retroceso 5 segundos
+        const rewindBtn = createControlButton('fa-backward', () => {
+            if (player) {
+                const currentTime = player.getCurrentTime();
+                player.seekTo(Math.max(0, currentTime - 5), true);
+            }
+        });
+
+        // Botón de play/pause
+        const playPauseBtn = createControlButton('fa-pause', () => {
+            if (player) {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                }
+            }
+        });
+
+        // Botón de avance 5 segundos
+        const forwardBtn = createControlButton('fa-forward', () => {
+            if (player) {
+                const currentTime = player.getCurrentTime();
+                const duration = player.getDuration();
+                player.seekTo(Math.min(duration, currentTime + 5), true);
+            }
+        });
+
+        // Agregar los botones al contenedor
+        controlsContainer.appendChild(rewindBtn);
+        controlsContainer.appendChild(playPauseBtn);
+        controlsContainer.appendChild(forwardBtn);
+        videoContainer.appendChild(controlsContainer);
+        videoContainer.appendChild(toggleControlsBtn);
+
+        // Inicializar el reproductor
+        let player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PLAYING) {
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                hideControls(); // Ocultar controles cuando el video está reproduciendo
+            } else if (event.data === YT.PlayerState.PAUSED) {
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                showControls(); // Mostrar controles cuando el video está pausado
+            }
+        }
+
+        playPauseBtn.addEventListener('click', () => {
+            if (player) {
+                const state = player.getPlayerState();
+                if (state === YT.PlayerState.PLAYING) {
+                    player.pauseVideo();
+                } else {
+                    player.playVideo();
+                }
+            }
+        });
+
+        if (!window.YT) {
+            const tag = document.createElement('script');
+            tag.src = "https://www.youtube.com/iframe_api";
+            const firstScriptTag = document.getElementsByTagName('script')[0];
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+            window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+        } else {
+            onYouTubeIframeAPIReady();
+        }
     };
-    
-    // Agregar el iframe al contenedor
-    videoContainer.appendChild(iframe);
-    
-    // Actualizar el caché
-    videoCache.set(video.id, video);
-    
-    // Actualizar la información del video
+
+    // Actualizar la información del video y el botón de completado
     updateVideoPlayer(video);
-
-    // Actualizar el estado del botón de completado
     updateCompleteButton(video.id);
-
-    // Actualizar último video visto
     userProgress.lastWatchedVideo = video.id;
     saveUserProgress();
 
