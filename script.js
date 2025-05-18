@@ -5,105 +5,208 @@ const videos = [
         title: "Clase 1 - Fundamentos del Karate - Postura y Respiración",
         description: "Aprende los principios básicos del karate: postura correcta, respiración y concentración. Fundamentos esenciales para todo practicante.",
         videoUrl: "https://www.youtube.com/embed/_8bmMYCwJCM",
-        thumbnail: "https://img.youtube.com/vi/_8bmMYCwJCM/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/_8bmMYCwJCM/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 2,
         title: "Clase 2 - Posiciones Básicas: Dachi y Kamae",
         description: "Domina las posiciones fundamentales del karate: zenkutsu-dachi, kokutsu-dachi y kiba-dachi. Aprende la correcta alineación y distribución del peso.",
         videoUrl: "https://www.youtube.com/embed/CB2KFb88gbc",
-        thumbnail: "https://img.youtube.com/vi/CB2KFb88gbc/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/CB2KFb88gbc/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 3,
         title: "Clase 3 - Técnicas de Puño: Tsuki y Uchi",
         description: "Aprende las técnicas básicas de puño: oi-tsuki, gyaku-tsuki y uraken-uchi. Técnicas esenciales para el combate y katas.",
         videoUrl: "https://www.youtube.com/embed/tlN8u7lMcJI",
-        thumbnail: "https://img.youtube.com/vi/tlN8u7lMcJI/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/tlN8u7lMcJI/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 4,
         title: "Clase 4 - Técnicas de Patada: Geri y Mawashi",
         description: "Domina las patadas fundamentales: mae-geri, yoko-geri y mawashi-geri. Aprende la técnica correcta y el equilibrio.",
         videoUrl: "https://www.youtube.com/embed/GBaM9GJLwhI",
-        thumbnail: "https://img.youtube.com/vi/GBaM9GJLwhI/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/GBaM9GJLwhI/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 5,
         title: "Clase 5 - Técnica de Defensa Baja y Golpe de Puño",
         description: "Aprende la correcta ejecución y técnica de la defensa baja (gedan-barai) y el golpe de puño básico. Ejercicios para mejorar tu precisión y efectividad en la defensa y el ataque.",
         videoUrl: "https://www.youtube.com/embed/KG58XGqE0D0",
-        thumbnail: "https://img.youtube.com/vi/KG58XGqE0D0/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/KG58XGqE0D0/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 6,
         title: "Clase 6 - Técnicas de Empuje y Golpes de Puño",
         description: "Aprende las técnicas de empuje (oshi) y los diferentes tipos de golpes con el puño. Ejercicios para mejorar tu potencia y precisión en los ataques.",
         videoUrl: "https://www.youtube.com/embed/YjM2xWJduXQ",
-        thumbnail: "https://img.youtube.com/vi/YjM2xWJduXQ/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/YjM2xWJduXQ/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 7,
         title: "Clase 7 - Hikite, Tsukite y Kiba Dachi",
         description: "Aprende la técnica de hikite (tirar el brazo) para aumentar la potencia de los golpes, la técnica de puño tsukite y la postura fundamental kiba dachi. Ejercicios para mejorar tu técnica y estabilidad.",
         videoUrl: "https://www.youtube.com/embed/dLqezGc0Q54",
-        thumbnail: "https://img.youtube.com/vi/dLqezGc0Q54/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/dLqezGc0Q54/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 8,
         title: "Clase 8 - Shuto Uke y Posturas Fundamentales",
         description: "Aprende la técnica de defensa con el canto de la mano (shuto uke) y dos posturas fundamentales del karate. Ejercicios para mejorar tu estabilidad y técnica defensiva.",
         videoUrl: "https://www.youtube.com/embed/0GKc2TBE8-M",
-        thumbnail: "https://img.youtube.com/vi/0GKc2TBE8-M/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/0GKc2TBE8-M/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 9,
         title: "Clase 9 - Parada de Defensa y Patada Básica",
         description: "Aprende la técnica de parada de defensa (gedan kakiwake) y la patada básica (mae-geri). Ejercicios para mejorar tu precisión y efectividad en la defensa y el ataque.",
         videoUrl: "https://www.youtube.com/embed/_EqXdEBs7iE",
-        thumbnail: "https://img.youtube.com/vi/_EqXdEBs7iE/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/_EqXdEBs7iE/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 10,
         title: "Clase 10 - Patadas y Golpes de Puño",
         description: "Aprende las técnicas fundamentales de patada: mikazuki geri, ura mikazuki geri y los golpes de puño básicos: oi-tsuki, gyaku-tsuki. Ejercicios para mejorar tu técnica y potencia.",
         videoUrl: "https://www.youtube.com/embed/Ze7WWjhlRrA",
-        thumbnail: "https://img.youtube.com/vi/Ze7WWjhlRrA/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/Ze7WWjhlRrA/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 11,
         title: "Clase 11 - Perfección de Defensas Básicas",
         description: "Perfecciona las técnicas básicas de defensa: gedan-barai, age-uke y soto-uke. Ejercicios detallados para mejorar tu precisión y efectividad en la defensa.",
         videoUrl: "https://www.youtube.com/embed/s-LH4styDbA",
-        thumbnail: "https://img.youtube.com/vi/s-LH4styDbA/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/s-LH4styDbA/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 12,
         title: "Clase 12 - Defensas en Todas las Direcciones",
         description: "Aprende las técnicas de defensa en todas las direcciones: jodan, chudan y gedan. Ejercicios para mejorar tu capacidad de reacción y protección.",
         videoUrl: "https://www.youtube.com/embed/X6R2Q6rVRhU",
-        thumbnail: "https://img.youtube.com/vi/X6R2Q6rVRhU/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/X6R2Q6rVRhU/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 13,
         title: "Clase 13 - Kihones Complementarios",
         description: "Aprende los kihones complementarios esenciales para perfeccionar tu técnica. Ejercicios adicionales para mejorar tu ejecución y control.",
         videoUrl: "https://www.youtube.com/embed/ygTBq-KtIxE",
-        thumbnail: "https://img.youtube.com/vi/ygTBq-KtIxE/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/ygTBq-KtIxE/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 14,
         title: "Clase 14 - Etiqueta en el Dojo: Reigi",
         description: "Aprende las normas de conducta y etiqueta en el dojo tradicional. Saludos, respeto, disciplina y protocolos esenciales para la práctica del karate.",
         videoUrl: "https://www.youtube.com/embed/p9t2JM0B7lA",
-        thumbnail: "https://img.youtube.com/vi/p9t2JM0B7lA/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/p9t2JM0B7lA/maxresdefault.jpg",
+        level: "10kyu"
     },
     {
         id: 15,
         title: "Clase 15 - Examen de Ingreso al Dojo",
         description: "Preparación para el examen de ingreso al dojo. Demuestra tu dominio de las técnicas básicas aprendidas y tu actitud marcial.",
         videoUrl: "https://www.youtube.com/embed/MhkrmOtpDAc",
-        thumbnail: "https://img.youtube.com/vi/MhkrmOtpDAc/maxresdefault.jpg"
+        thumbnail: "https://img.youtube.com/vi/MhkrmOtpDAc/maxresdefault.jpg",
+        level: "10kyu"
+    },
+    {
+        id: 16,
+        title: "Clase 16 - Primer Kihon: Oi Zuki, Fumi Dachi y Ayumi Ashi",
+        description: "Aprende el primer kihon fundamental del karate: Oi Zuki (golpe de puño con avance), Fumi Dachi (postura de paso) y Ayumi Ashi (desplazamiento). Técnicas esenciales para el desarrollo de la potencia y la movilidad.",
+        videoUrl: "https://www.youtube.com/embed/tXtYhh25UVE",
+        thumbnail: "https://img.youtube.com/vi/tXtYhh25UVE/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 17,
+        title: "Clase 17 - Segundo Kihon 9 Kyu: Jodan Age Uke y Fortalecimiento",
+        description: "Aprende el segundo kihon del nivel 9 kyu: Jodan Age Uke (defensa alta) y ejercicios de fortalecimiento. Técnicas fundamentales para desarrollar la defensa superior y mejorar la condición física.",
+        videoUrl: "https://www.youtube.com/embed/jmwlXhEVjVk",
+        thumbnail: "https://img.youtube.com/vi/jmwlXhEVjVk/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 18,
+        title: "Clase 18 - Tercer Kihon 9 Kyū: Chudan Soto Uke y Técnicas de Desplazamiento",
+        description: "Aprende el tercer kihon del nivel 9 kyū: Chudan Soto Uke (defensa media exterior) y las técnicas fundamentales de desplazamiento. Ejercicios esenciales para mejorar la movilidad y la defensa media.",
+        videoUrl: "https://www.youtube.com/embed/aW7bwyrrpQQ",
+        thumbnail: "https://img.youtube.com/vi/aW7bwyrrpQQ/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 19,
+        title: "Clase 19 - Cuarto Kihon 9 Kyū: Gedan Barai y Técnicas de Desplazamiento",
+        description: "Aprende el cuarto kihon del nivel 9 kyū: Gedan Barai (defensa baja) y las técnicas avanzadas de desplazamiento. Ejercicios fundamentales para desarrollar la defensa inferior y mejorar la movilidad en combate.",
+        videoUrl: "https://www.youtube.com/embed/U4I3mz0TBco",
+        thumbnail: "https://img.youtube.com/vi/U4I3mz0TBco/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 20,
+        title: "Clase 20 - Quinto Kihon 9 Kyū: Gedan Kakiwake y Chudan Mae Geri en Desplazamiento",
+        description: "Aprende el quinto kihon del nivel 9 kyū: Gedan Kakiwake (defensa doble baja) y Chudan Mae Geri (patada frontal media) en desplazamiento. Técnicas avanzadas para desarrollar la defensa doble y las patadas con movimiento.",
+        videoUrl: "https://www.youtube.com/embed/rxf6qXY-CsY",
+        thumbnail: "https://img.youtube.com/vi/rxf6qXY-CsY/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 21,
+        title: "Clase 21 - Sexto Kihon 9 Kyū: Kokutsu Dachi y Shuto Uke en Desplazamiento",
+        description: "Aprende el sexto kihon del nivel 9 kyū: Kokutsu Dachi (postura trasera) y Shuto Uke (defensa con canto de mano) en desplazamiento. Técnicas avanzadas para desarrollar la postura trasera y la defensa con canto de mano en movimiento.",
+        videoUrl: "https://www.youtube.com/embed/cPdQ1JwYCLM",
+        thumbnail: "https://img.youtube.com/vi/cPdQ1JwYCLM/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 22,
+        title: "Clase 22 - Ashi Waza 9 Kyū y Primeros Pasos del Kata",
+        description: "Aprende todas las técnicas de pierna (ashi waza) del nivel 9 kyū y los primeros movimientos del kata. Repaso completo de patadas fundamentales y transición hacia la práctica de kata.",
+        videoUrl: "https://www.youtube.com/embed/xF69LRpo_tg",
+        thumbnail: "https://img.youtube.com/vi/xF69LRpo_tg/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 23,
+        title: "Clase 23 - Jo No Kata Completo para 9 Kyū",
+        description: "Aprende la forma completa del Jo No Kata correspondiente al nivel 9 kyū. Ejecución detallada de todos los movimientos, secuencias y aplicaciones de este kata fundamental.",
+        videoUrl: "https://www.youtube.com/embed/Uury4DxcuBo",
+        thumbnail: "https://img.youtube.com/vi/Uury4DxcuBo/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 24,
+        title: "Clase 24 - Kihon Sanbon Kumite para 9 Kyū",
+        description: "Aprende el Kihon Sanbon Kumite (combate preestablecido a 3 pasos) del nivel 9 kyū. Técnicas fundamentales de ataque y defensa en secuencia, desarrollando el timing y la distancia en combate.",
+        videoUrl: "https://www.youtube.com/embed/R02gJ8dRmPs",
+        thumbnail: "https://img.youtube.com/vi/R02gJ8dRmPs/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 25,
+        title: "Clase 25 - Aplicación del Jo No Kata en Kumite y Preparación para 9 Kyū",
+        description: "Aprende las aplicaciones prácticas del Jo No Kata en situaciones de combate y la preparación completa para el examen de 9 kyū. Repaso integral de todas las técnicas, katas y requisitos necesarios para la promoción.",
+        videoUrl: "https://www.youtube.com/embed/LYbCbDIJdPw",
+        thumbnail: "https://img.youtube.com/vi/LYbCbDIJdPw/maxresdefault.jpg",
+        level: "9kyu"
+    },
+    {
+        id: 26,
+        title: "Clase 26 - Examen para Cinturón Blanco - 9 Kyū (Shiro Obi)",
+        description: "Demostración completa del examen para cinturón blanco - 9 kyū (Shiro Obi). Evaluación de kihon, kata, kumite y todos los requisitos necesarios para obtener el grado de 9 kyū.",
+        videoUrl: "https://www.youtube.com/embed/jOifsU9ILAI",
+        thumbnail: "https://img.youtube.com/vi/jOifsU9ILAI/maxresdefault.jpg",
+        level: "9kyu"
     }
 ];
 
@@ -117,6 +220,7 @@ const completeButton = document.getElementById('complete-video');
 const speedControl = document.getElementById('speed-control');
 const fullscreenToggle = document.getElementById('fullscreen-toggle');
 const videoContainer = document.querySelector('.video-container');
+const classSelect = document.getElementById('class-select');
 
 // Velocidades disponibles para el video
 const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
@@ -199,32 +303,59 @@ function loadThumbnail(video, videoCard) {
 }
 
 // Función para cargar la lista de videos
-function loadVideoList() {
+function loadVideoList(level = 'all') {
+    const videoGrid = document.getElementById('video-grid');
+    if (!videoGrid) return;
+    
+    console.log('Cargando videos para nivel:', level);
+    
+    // Filtrar videos según el nivel seleccionado
+    const filteredVideos = level === 'all' 
+        ? videos 
+        : videos.filter(video => video.level === level);
+    
+    console.log('Videos filtrados:', filteredVideos.length);
+    
     videoGrid.innerHTML = '';
     
-    videos.forEach(video => {
+    filteredVideos.forEach(video => {
         const videoCard = document.createElement('div');
         videoCard.className = 'video-card';
         videoCard.setAttribute('data-video-id', video.id);
+        
+        const isCompleted = userProgress.completedVideos.has(video.id);
+        const progress = userProgress.watchTime[video.id] || 0;
+        
         videoCard.innerHTML = `
             <div class="video-thumbnail">
-                <!-- La miniatura se cargará aquí -->
+                <img src="${video.thumbnail}" alt="${video.title}">
+                ${isCompleted ? '<div class="completed-badge">✓</div>' : ''}
             </div>
-            <div class="video-card-info">
+            <div class="video-info">
                 <h4>${video.title}</h4>
                 <p>${video.description}</p>
+                <div class="video-meta">
+                    <span class="video-level">
+                        <i class="fas fa-belt"></i>
+                        ${video.level === '10kyu' ? 'Cinturón Blanco (10 Kyū)' : 'Cinturón Blanco-Amarillo (9 Kyū)'}
+                    </span>
+                </div>
                 <div class="video-progress">
                     <div class="progress-bar">
-                        <div class="progress" style="width: ${userProgress.watchTime[video.id] || 0}%"></div>
+                        <div class="progress" style="width: ${progress}%"></div>
                     </div>
                 </div>
             </div>
         `;
         
-        // Cargar la miniatura
-        loadThumbnail(video, videoCard);
+        videoCard.addEventListener('click', () => {
+            playVideo(video);
+            document.querySelector('.video-player')?.scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start'
+            });
+        });
         
-        videoCard.addEventListener('click', () => playVideo(video));
         videoGrid.appendChild(videoCard);
     });
 }
@@ -743,73 +874,160 @@ function toggleFullscreen() {
     }
 }
 
-// Event Listeners
-themeToggle.addEventListener('click', toggleTheme);
-completeButton.addEventListener('click', () => {
-    const currentVideo = videos.find(v => v.id === userProgress.lastWatchedVideo);
-    if (currentVideo) {
-        if (userProgress.completedVideos.has(currentVideo.id)) {
-            userProgress.completedVideos.delete(currentVideo.id);
-        } else {
-            userProgress.completedVideos.add(currentVideo.id);
-        }
-        saveUserProgress();
-        updateCompleteButton(currentVideo.id);
-        loadVideoList(); // Actualizar la lista de videos para mostrar el estado actualizado
+// Función para manejar el popup de bienvenida
+function handleWelcomePopup() {
+    const popup = document.getElementById('welcomePopup');
+    const closeButton = document.getElementById('welcomePopupClose');
+    
+    // Verificar si el usuario ya ha visto el popup
+    const hasSeenPopup = localStorage.getItem('hasSeenWelcomePopup');
+    
+    if (!hasSeenPopup) {
+        // Mostrar el popup si no lo ha visto antes
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 500);
     }
-});
-
-// Event Listeners para los controles
-speedControl.addEventListener('click', changeVideoSpeed);
-fullscreenToggle.addEventListener('click', toggleFullscreen);
-
-// Event listener para cuando se sale del modo pantalla completa
-document.addEventListener('fullscreenchange', () => {
-    if (!document.fullscreenElement) {
-        videoContainer.classList.remove('fullscreen');
-    }
-});
-
-// Event listener para cuando se recarga la página
-window.addEventListener('load', scrollToTop);
-
-// Event listener para cambios en la conexión
-window.addEventListener('online', () => {
-    const videoContainer = document.querySelector('.video-container');
-    const offlineMessage = videoContainer.querySelector('.offline-message');
-    if (offlineMessage) {
-        const lastVideo = userProgress.lastWatchedVideo 
-            ? videos.find(v => v.id === userProgress.lastWatchedVideo)
-            : videos[0];
-        if (lastVideo) {
-            playVideo(lastVideo);
-        }
-    }
-});
-
-window.addEventListener('offline', () => {
-    const videoContainer = document.querySelector('.video-container');
-    const iframe = videoContainer.querySelector('iframe');
-    if (iframe) {
-        showOfflineMessage(videoContainer);
-    }
-});
+    
+    // Manejar el cierre del popup
+    closeButton.addEventListener('click', () => {
+        popup.classList.remove('active');
+        // Siempre guardar que ya vio el popup
+        localStorage.setItem('hasSeenWelcomePopup', 'true');
+    });
+}
 
 // Inicialización
-document.addEventListener('DOMContentLoaded', () => {
-    loadUserProgress();
-    loadVideoList();
-    loadTheme();
-    scrollToTop(); // Asegurar que la página comience desde arriba
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM cargado, inicializando...');
     
-    // Reproducir el último video visto o el primero, pero sin desplazar la página
+    // Cargar el progreso del usuario y el tema
+    loadUserProgress();
+    loadTheme();
+    
+    // Inicializar el popup de bienvenida
+    handleWelcomePopup();
+    
+    // Elementos del DOM
+    const videoGrid = document.getElementById('video-grid');
+    const beltLevelButtons = document.querySelectorAll('.belt-level-btn');
+    const themeToggle = document.getElementById('theme-toggle');
+    const completeButton = document.getElementById('complete-video');
+    const speedControl = document.getElementById('speed-control');
+    const fullscreenToggle = document.getElementById('fullscreen-toggle');
+    const classSelect = document.getElementById('class-select');
+    
+    console.log('Botones encontrados:', beltLevelButtons.length);
+    
+    // Agregar event listeners solo si los elementos existen
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+    
+    if (completeButton) {
+        completeButton.addEventListener('click', () => {
+            const currentVideo = videos.find(v => v.id === userProgress.lastWatchedVideo);
+            if (currentVideo) {
+                if (userProgress.completedVideos.has(currentVideo.id)) {
+                    userProgress.completedVideos.delete(currentVideo.id);
+                } else {
+                    userProgress.completedVideos.add(currentVideo.id);
+                }
+                saveUserProgress();
+                updateCompleteButton(currentVideo.id);
+                loadVideoList();
+            }
+        });
+    }
+    
+    if (speedControl) {
+        speedControl.addEventListener('click', changeVideoSpeed);
+    }
+    
+    if (fullscreenToggle) {
+        fullscreenToggle.addEventListener('click', toggleFullscreen);
+    }
+    
+    if (classSelect) {
+        classSelect.addEventListener('change', () => loadVideoList(classSelect.value));
+    }
+    
+    // Event listener para cuando se sale del modo pantalla completa
+    document.addEventListener('fullscreenchange', () => {
+        const videoContainer = document.querySelector('.video-container');
+        if (videoContainer && !document.fullscreenElement) {
+            videoContainer.classList.remove('fullscreen');
+        }
+    });
+    
+    // Event listener para cuando se recarga la página
+    window.addEventListener('load', scrollToTop);
+    
+    // Event listeners para cambios en la conexión
+    window.addEventListener('online', () => {
+        const videoContainer = document.querySelector('.video-container');
+        const offlineMessage = videoContainer?.querySelector('.offline-message');
+        if (offlineMessage) {
+            const lastVideo = userProgress.lastWatchedVideo 
+                ? videos.find(v => v.id === userProgress.lastWatchedVideo)
+                : videos[0];
+            if (lastVideo) {
+                playVideo(lastVideo);
+            }
+        }
+    });
+    
+    window.addEventListener('offline', () => {
+        const videoContainer = document.querySelector('.video-container');
+        const iframe = videoContainer?.querySelector('iframe');
+        if (iframe) {
+            showOfflineMessage(videoContainer);
+        }
+    });
+    
+    // Función para actualizar el contador de clases
+    function updateClassCount() {
+        const counts = {
+            '10kyu': videos.filter(v => v.level === '10kyu').length,
+            '9kyu': videos.filter(v => v.level === '9kyu').length
+        };
+        
+        const count10Kyu = document.querySelector('[data-level="10kyu"] .belt-count');
+        const count9Kyu = document.querySelector('[data-level="9kyu"] .belt-count');
+        
+        if (count10Kyu) count10Kyu.textContent = `${counts['10kyu']} clases`;
+        if (count9Kyu) count9Kyu.textContent = `${counts['9kyu']} clases`;
+    }
+    
+    // Agregar event listeners a los botones de nivel
+    if (beltLevelButtons.length > 0) {
+        beltLevelButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                console.log('Botón clickeado:', this.getAttribute('data-level'));
+                
+                // Remover clase active de todos los botones
+                beltLevelButtons.forEach(btn => btn.classList.remove('active'));
+                
+                // Agregar clase active al botón clickeado
+                this.classList.add('active');
+                
+                // Filtrar videos según el nivel seleccionado
+                const level = this.getAttribute('data-level');
+                loadVideoList(level);
+            });
+        });
+    }
+    
+    // Inicializar
+    updateClassCount();
+    loadVideoList();
+    
+    // Reproducir el último video visto o el primero
     const videoToPlay = userProgress.lastWatchedVideo 
         ? videos.find(v => v.id === userProgress.lastWatchedVideo)
         : videos[0];
     
     if (videoToPlay) {
-        // Llamar a playVideo sin evento para evitar el scroll automático
-        const fakeEvent = { type: 'init' };
-        playVideo.call({ event: fakeEvent }, videoToPlay);
+        playVideo(videoToPlay);
     }
 }); 

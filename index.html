@@ -42,6 +42,39 @@
 
             <section class="video-list">
                 <h3>Lecciones Disponibles</h3>
+                <div class="class-selector">
+                    <div class="belt-levels">
+                        <button class="belt-level-btn active" data-level="all">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Todas las clases</span>
+                        </button>
+                        <button class="belt-level-btn" data-level="10kyu">
+                            <div class="belt-icon"><img src="cinturonblanco.png" alt="Cinturón Blanco"></div>
+                            <div class="belt-info">
+                                <span class="belt-name">Cinturón Blanco</span>
+                                <span class="belt-grade">10 Kyū</span>
+                                <span class="belt-count">15 clases</span>
+                            </div>
+                        </button>
+                        <button class="belt-level-btn" data-level="9kyu">
+                            <div class="belt-icon"><img src="cinturonblancoamarillo.png" alt="Cinturón Blanco-Amarillo"></div>
+                            <div class="belt-info">
+                                <span class="belt-name">Cinturón Blanco-Amarillo</span>
+                                <span class="belt-grade">9 Kyū</span>
+                                <span class="belt-count">11 clases</span>
+                            </div>
+                        </button>
+                        <button class="belt-level-btn" data-level="8kyu" disabled style="opacity:0.6; cursor:not-allowed; position:relative;">
+                            <div class="belt-icon"><img src="cinturonamarillo.png" alt="Cinturón Amarillo"></div>
+                            <div class="belt-info">
+                                <span class="belt-name">Cinturón Amarillo</span>
+                                <span class="belt-grade">8º Kyū</span>
+                                <span class="belt-count">Próximamente</span>
+                            </div>
+                            <span class="coming-soon" style="position:absolute;top:8px;right:16px;font-size:0.85rem;color:#e6b800;font-weight:600;">Pronto</span>
+                        </button>
+                    </div>
+                </div>
                 <div class="video-grid" id="video-grid">
                     <!-- Los videos se cargarán dinámicamente aquí -->
                 </div>
@@ -50,5 +83,21 @@
     </div>
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
+
+    <!-- Popup de bienvenida -->
+    <div class="welcome-popup" id="welcomePopup">
+        <div class="welcome-popup-content">
+            <img src="catcorazon.png" alt="Gato con corazón" class="welcome-popup-image">
+            <h2 class="welcome-popup-title">¡Bienvenido a Aprende Karate!</h2>
+            <div class="welcome-popup-message">
+                <p>¡Gracias por tu apoyo a nuestra app! Estamos comprometidos a mejorar constantemente para brindarte la mejor experiencia de aprendizaje.</p>
+                <p style="margin-top: 15px;">Recuerda que en esta modalidad de aprendizaje, la clave del éxito está en la perseverancia y la práctica constante en casa. Cada día de práctica te acerca más a tus objetivos.</p>
+                <p style="margin-top: 15px; font-style: italic; color: var(--primary-color);">¡Juntos seguiremos creciendo en el camino del karate!</p>
+            </div>
+            <div class="welcome-popup-buttons">
+                <button class="welcome-popup-button primary" id="welcomePopupClose">Entendido</button>
+            </div>
+        </div>
+    </div>
 </body>
 </html> 
