@@ -1051,7 +1051,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 loaderElement.style.opacity = '0';
                 setTimeout(() => {
                     loaderElement.remove();
-                    // Restaurar el scroll
                     document.body.style.overflow = '';
                 }, 300);
             }
@@ -1065,6 +1064,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Si volvemos a español, restaurar el texto original
                 if (mainContent) restoreOriginalText(mainContent);
                 if (header) restoreOriginalText(header);
+                // Guardar preferencia de idioma español
+                localStorage.setItem('preferredLanguage', 'es');
             } else {
                 // Si es la primera vez que guardamos el texto original
                 if (originalTexts.size === 0) {
@@ -1074,13 +1075,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Traducir al nuevo idioma
                 if (mainContent) await translateElement(mainContent, lang);
                 if (header) await translateElement(header, lang);
+                // No guardamos el idioma portugués en localStorage
             }
 
             // Actualizar el idioma actual
             currentLanguage.textContent = lang.toUpperCase();
-            
-            // Guardar preferencia de idioma
-            localStorage.setItem('preferredLanguage', lang);
             
             // Actualizar clases y atributos según el idioma
             document.documentElement.lang = lang;
@@ -1097,7 +1096,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 loaderElement.style.opacity = '0';
                 setTimeout(() => {
                     loaderElement.remove();
-                    // Restaurar el scroll
                     document.body.style.overflow = '';
                 }, 300);
             }
