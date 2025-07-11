@@ -207,6 +207,14 @@ const videos = [
         videoUrl: "https://www.youtube.com/embed/jOifsU9ILAI",
         thumbnail: "https://img.youtube.com/vi/jOifsU9ILAI/maxresdefault.jpg",
         level: "9kyu"
+    },
+    {
+        id: 27,
+        title: "Clase 27 - Cinturón Amarillo: Obi y Yoko Geri Keage",
+        description: "Aprende la correcta colocación del cinturón Obi y la técnica de patada lateral ascendente Yoko Geri Keage. Inicio del contenido correspondiente al cinturón amarillo (8 kyū). Técnicas fundamentales para desarrollar la potencia y precisión en las patadas laterales. Más clases del cinturón amarillo próximamente.",
+        videoUrl: "https://www.youtube.com/embed/gsSfBhFwcl4",
+        thumbnail: "https://img.youtube.com/vi/gsSfBhFwcl4/maxresdefault.jpg",
+        level: "8kyu"
     }
 ];
 
@@ -1135,13 +1143,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Inicialización básica para todas las páginas
+function initializeBasicFeatures() {
+    // Cargar el tema
+    loadTheme();
+    
+    // Agregar event listener al botón de tema si existe
+    const themeToggle = document.getElementById('theme-toggle');
+    if (themeToggle) {
+        themeToggle.addEventListener('click', toggleTheme);
+    }
+}
+
 // Inicialización
 document.addEventListener('DOMContentLoaded', function() {
     console.log('DOM cargado, inicializando...');
     
-    // Cargar el progreso del usuario y el tema
+    // Inicializar características básicas en todas las páginas
+    initializeBasicFeatures();
+    
+    // Cargar el progreso del usuario
     loadUserProgress();
-    loadTheme();
     
     // Inicializar el popup de bienvenida
     handleWelcomePopup();
@@ -1149,7 +1171,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // Elementos del DOM
     const videoGrid = document.getElementById('video-grid');
     const beltLevelButtons = document.querySelectorAll('.belt-level-btn');
-    const themeToggle = document.getElementById('theme-toggle');
     const completeButton = document.getElementById('complete-video');
     const speedControl = document.getElementById('speed-control');
     const fullscreenToggle = document.getElementById('fullscreen-toggle');
@@ -1158,10 +1179,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Botones encontrados:', beltLevelButtons.length);
     
     // Agregar event listeners solo si los elementos existen
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-    
     if (completeButton) {
         completeButton.addEventListener('click', () => {
             const currentVideo = videos.find(v => v.id === userProgress.lastWatchedVideo);
@@ -1256,16 +1273,18 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Inicializar
-    updateClassCount();
-    loadVideoList();
-    
-    // Reproducir el último video visto o el primero
-    const videoToPlay = userProgress.lastWatchedVideo 
-        ? videos.find(v => v.id === userProgress.lastWatchedVideo)
-        : videos[0];
-    
-    if (videoToPlay) {
-        playVideo(videoToPlay);
+    // Inicializar solo si estamos en la página principal
+    if (videoGrid) {
+        updateClassCount();
+        loadVideoList();
+        
+        // Reproducir el último video visto o el primero
+        const videoToPlay = userProgress.lastWatchedVideo 
+            ? videos.find(v => v.id === userProgress.lastWatchedVideo)
+            : videos[0];
+        
+        if (videoToPlay) {
+            playVideo(videoToPlay);
+        }
     }
 }); 
